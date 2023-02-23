@@ -1,0 +1,8 @@
+-- AlterTable
+ALTER TABLE `manutencao` MODIFY `dataInicio` DATETIME(3) NULL DEFAULT CURRENT_TIMESTAMP(3),
+    MODIFY `dataFim` DATETIME(3) NULL,
+    MODIFY `valor` DOUBLE NULL;
+
+-- AlterTable
+ALTER TABLE `operacao` MODIFY `dataSaida` DATETIME(3) NULL DEFAULT CURRENT_TIMESTAMP(3),
+    MODIFY `dataRetorno` DATETIME(3) NULL;
