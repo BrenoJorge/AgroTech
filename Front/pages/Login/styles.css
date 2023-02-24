@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.background{
+    background-image: linear-gradient(to right, #6F814F,#1A260F,#6F814F,#1A260F,#1A260F,#6F814F,#1A260F);
+    filter:blur(1.5rem);
+    height: 110vh;
+    width: 110vw;
+    position:absolute;
+    top: -10;
+    left: -10;
+    z-index: -1;
+}
+
+div{
+    background: rgba(255, 255, 255, 0.2);
+    padding: 40px;
+    border-radius: 15px;
+    color: #fff;
+    border: 1px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+
+input{
+    padding: 20px;
+    border: none;
+    outline: none;
+    font-size: 30px;
+    height: 100%;
+    width: 100%;
+    background: transparent;
+    color: #def7f4;
+}
+
+input::placeholder{
+    color:#def7f4;
+}
+
+button{
+    background-color: #1F2E11;
+    border: none;
+    padding: 15px;
+    width: 100%;
+    border-radius: 10px;
+    color: white;
+    font-size: 25px;
+    
+}
+
+img{
+    height:40px;
+}
+
+button:hover{
+    background-color: white;
+    color: #1F2E11;
+    cursor: pointer;
+}
+
+.input-field{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 10px;
+    height: 2px;
+    border: 2px solid #def7f4;
+    margin: 10px;
+}
+
+.mensagem{
+    border-color: rgb(184, 7, 7);
+    color:rgb(193, 37, 37);
+    font-size: 20px;
+    background-color: rgb(193, 37, 37, 0.2);
+}
+
+.model{
+    visibility: hidden;
+    display: none;
+}
