@@ -4,7 +4,7 @@ function onLoad() {
 
     const options = { method: 'GET' };
 
-    fetch('http://localhost:3000/manutencao', options)
+    fetch('http://localhost:3000/frota', options)
         .then(response => response.json())
         .then(response => {
             console.log(response)
@@ -13,11 +13,9 @@ function onLoad() {
                 let tab = tabela.cloneNode(true)
 
                 tab.querySelector('.id').innerHTML = element.id
-                tab.querySelector('.dataInicio').innerHTML = element.dataInicio
-                tab.querySelector('.dataFim').innerHTML = element.dataFim
-                tab.querySelector('.valor').innerHTML = element.valor
-                tab.querySelector('.descricao').innerHTML = element.descricao
-                tab.querySelector('.frota').innerHTML = element.frota.placa
+                tab.querySelector('.modelo').innerHTML = element.modelo
+                tab.querySelector('.placa').innerHTML = element.placa
+                tab.querySelector('.marca').innerHTML = element.marca
 
                 document.querySelector('table').appendChild(tab)
             });

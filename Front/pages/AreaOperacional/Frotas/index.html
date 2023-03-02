@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../../../global/styles.css">
     <link rel="stylesheet" href="./styles.css">
     <link rel="stylesheet" href="../../../global/stylesTabela.css">
-    <title>Manutenção</title>
+    <title>Motoristas</title>
 </head>
 
 <body onload="onLoad()">
@@ -34,7 +34,7 @@
                     </a>
 
                 </li>
-                <li class="has-subnav">
+                <li class="has-subnav selected">
                     <a href="../Frotas/index.html">
                         <i class="fa fa-truck fa-2x"></i>
                         <span class="nav-text">
@@ -43,7 +43,7 @@
                     </a>
 
                 </li>
-                <li class="has-subnav selected">
+                <li class="has-subnav">
                     <a href="../Manutencao/index.html">
                         <i class="fa fa-hammer fa-2x"></i>
                         <span class="nav-text">
@@ -77,7 +77,7 @@
         </nav>
     </div>
 
-    <!-- codigo manutencao  -->
+    <!-- codigo operação  -->
     <div class="campo">
         <div class="header">
             <input type="text" placeholder="pesquisar">
@@ -87,11 +87,9 @@
             <table>
                 <tr>
                     <td class="id">Id</td>
-                    <td class="dataInicio">Data de Inicio</td>
-                    <td class="dataFim">Data de Finalização</td>
-                    <td class="valor">Valor</td>
-                    <td class="descricao">Descrição</td>
-                    <td class="frota">Frota</td>
+                    <td class="modelo">Nome Motorista</td>
+                    <td class="placa">CNH</td>
+                    <td class="marca">CPF</td>
                 </tr>
             </table>
         </div>
