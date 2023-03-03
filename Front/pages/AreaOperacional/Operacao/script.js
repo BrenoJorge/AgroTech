@@ -19,7 +19,7 @@ function onLoad() {
                 tab.querySelector('.dataRetorno').innerHTML = element.dataRetorno
                 tab.querySelector('.descricao').innerHTML = element.descricao
 
-                document.querySelector('table').appendChild(tab)
+                document.querySelector('tbody').appendChild(tab)
             });
         }).catch(err => console.error(err));
 }

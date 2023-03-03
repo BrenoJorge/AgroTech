@@ -19,7 +19,7 @@ function onLoad() {
                 tab.querySelector('.descricao').innerHTML = element.descricao
                 tab.querySelector('.frota').innerHTML = element.frota.placa
 
-                document.querySelector('table').appendChild(tab)
+                document.querySelector('tbody').appendChild(tab)
             });
         }).catch(err => console.error(err));
 }

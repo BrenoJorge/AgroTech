@@ -16,7 +16,7 @@ function onLoad() {
                 tab.querySelector('.nomeMotorista').innerHTML = element.nome
                 tab.querySelector('.cnh').innerHTML = element.cnh
                 tab.querySelector('.cpf').innerHTML = element.cpf
-                document.querySelector('table').appendChild(tab)
+                document.querySelector('tbody').appendChild(tab)
             });
         }).catch(err => console.error(err));
 }

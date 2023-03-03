@@ -17,7 +17,23 @@ const create = async (req, res, next) => {
 }
 
 const read = async (req, res, next) => {
-    const frotas = await prisma.Frota.findMany()
+    const frotas = await prisma.Frota.findMany({
+        select: {
+            id: true,
+            modelo: true,
+            placa: true,
+            marca: true,
+            operacao: {
+                select: {
+                    idMotorista: true,
+                    idFrota: true,
+                    dataSaida: true,
+                    dataRetorno: true,
+                    descricao: true
+                }
+            }
+        }
+    })
     res.status(200).json(frotas).end()
 }
 

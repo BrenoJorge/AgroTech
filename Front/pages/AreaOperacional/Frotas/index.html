@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://kit.fontawesome.com/c20c8761af.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
     <link rel="stylesheet" href="../../../global/styles.css">
     <link rel="stylesheet" href="./styles.css">
     <link rel="stylesheet" href="../../../global/stylesTabela.css">
@@ -80,17 +81,20 @@
     <!-- codigo operação  -->
     <div class="campo">
         <div class="header">
-            <input type="text" placeholder="pesquisar">
+            <input type="text" placeholder="pesquisar" id="filtro">
             <h3>Não conectado</h3>
         </div>
-        <div class="main">
+        <div class="container">
             <table>
-                <tr>
-                    <td class="id">Id</td>
-                    <td class="modelo">Nome Motorista</td>
-                    <td class="placa">CNH</td>
-                    <td class="marca">CPF</td>
-                </tr>
+                <thead>
+                    <tr>
+                        <td class="id">Id</td>
+                        <td class="modelo">Modelo</td>
+                        <td class="placa">Placa</td>
+                        <td class="marca">Marca</td>
+                    </tr>
+                </thead>
+                <tbody></tbody>
             </table>
         </div>
     </div>

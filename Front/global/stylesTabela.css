@@ -1,12 +1,28 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html{
+    height: 100vh;
+}
+
 body{
-    display:flex;
+    display: flex;
 }
 
-table{
-    border-collapse: collapse;
+.header{
+    display: flex;
+    justify-content: space-between;
+    margin: 0 20px;
+    align-items: center;
 }
 
-td{
-    border: 3px solid black;
-    padding: 5px;
+.campo{
+    width: 100%;
+}
+
+#filtro{
+    width: 40%;
 }

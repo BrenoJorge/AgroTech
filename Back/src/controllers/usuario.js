@@ -1,10 +1,10 @@
 const { PrismaClient } = require('@prisma/client')
-const jwt = require('jsonwebtoken');
-require('dotenv').config()
+const  md5  = require('md5')
 
 const prisma = new PrismaClient()
 
 const create = async (req, res, next) => {
+    req.body.senha = md5(req.body.senha)
     const usuarios = await prisma.Usuario.create({
         data: req.body
     }).catch(err => {

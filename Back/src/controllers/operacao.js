@@ -46,24 +46,7 @@ const create = async (req, res, next) => {
 }
 
 const read = async (req, res, next) => {
-    const operacoes = await prisma.Operacao.findMany({
-        select:{
-            id:true,
-            dataSaida:true,
-            dataRetorno:true,
-            descricao:true,
-            motorista: {
-                select:{
-                    nome:true
-                }
-            },
-            frota:{
-                select:{
-                    placa:true
-                }
-            }
-        }
-    })
+    const operacoes = await prisma.Operacao.findMany()
     res.status(200).json(operacoes).end()
 }
 
@@ -75,7 +58,7 @@ const readId = async (req, res, next) => {
 }
 
 const updateDataRetorno = async (req, res, next) => {
-
+    console.log(req.body)
     const options = {
         timeZone: 'America/Sao_Paulo',
         year: "numeric",
@@ -106,7 +89,6 @@ const updateDataRetorno = async (req, res, next) => {
         where: { id: Number(req.params.id) },
         data: { dataRetorno: req.body.dataRetorno }
     })
-
     res.status(200).send(operacoes).end()
 }
 

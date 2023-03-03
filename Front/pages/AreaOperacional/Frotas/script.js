@@ -17,7 +17,7 @@ function onLoad() {
                 tab.querySelector('.placa').innerHTML = element.placa
                 tab.querySelector('.marca').innerHTML = element.marca
 
-                document.querySelector('table').appendChild(tab)
+                document.querySelector('tbody').appendChild(tab)
             });
         }).catch(err => console.error(err));
 }
