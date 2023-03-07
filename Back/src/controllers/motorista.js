@@ -38,6 +38,20 @@ const update = async (req, res, next) => {
     res.status(200).send(motoristas).end()
 }
 
+const updateDisponivel = async (id) => {
+    const motoristas = await prisma.Motorista.update({
+        where: { id: Number(id) },
+        data: {disponivel:true} 
+    })
+}
+
+const updateIndisponivel = async (id) => {
+    const motoristas = await prisma.Motorista.update({
+        where: { id: Number(id) },
+        data: {disponivel:false} 
+    })
+}
+
 const remove = async (req, res, next) => {
     const motoristas = await prisma.Motorista.delete({
         where: {
@@ -52,5 +66,7 @@ module.exports = {
     read,
     readId,
     update,
-    remove
+    remove,
+    updateDisponivel,
+    updateIndisponivel
 }

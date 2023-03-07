@@ -1,4 +1,6 @@
 const { PrismaClient } = require('@prisma/client')
+const Motorista = require('../controllers/motorista');
+const Frota = require('../controllers/frota');
 
 const prisma = new PrismaClient()
 
@@ -28,6 +30,26 @@ const create = async (req, res, next) => {
 
     req.body.idMotorista = Number(req.body.idMotorista)
     req.body.idFrota = Number(req.body.idFrota)
+    
+    const frota = await prisma.frota.findUnique({
+        where:{
+            id: req.body.idFrota
+        }
+    })
+    
+    if(frota.disponivel == false){
+        return res.status(200).json({"mnsagem":"frota indisponivel"})
+    }
+
+    const motorista = await prisma.motorista.findUnique({
+        where:{
+            id: req.body.idMotorista
+        }
+    })
+
+    if(motorista.disponivel == false){
+        return res.status(200).json({"mnsagem":"motorista indisponivel"})
+    }
 
     const operacoes = await prisma.Operacao.create({
         data: req.body
@@ -41,12 +63,31 @@ const create = async (req, res, next) => {
         }
         
     })
-
+    
+    Motorista.updateIndisponivel(req.body.idMotorista)
+    Frota.updateIndisponivel(req.body.idFrota)
     res.status(200).json(operacoes).end()
 }
 
 const read = async (req, res, next) => {
-    const operacoes = await prisma.Operacao.findMany()
+    const operacoes = await prisma.Operacao.findMany({
+        select:{
+            id:true,
+            dataSaida:true,
+            dataRetorno:true,
+            descricao:true,
+            frota:{
+                select:{
+                    placa:true
+                }
+            },
+            motorista:{
+                select:{
+                    nome:true
+                }
+            }
+        }
+    })
     res.status(200).json(operacoes).end()
 }
 

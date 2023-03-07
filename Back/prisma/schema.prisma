@@ -15,6 +15,7 @@ model Motorista {
   nome String
   cnh  String @unique
   cpf String  @unique
+  disponivel Boolean @default(true)
   operacao Operacao[]
 }
 
@@ -31,6 +32,7 @@ model Frota {
   modelo     String
   placa   String @unique
   marca String
+  disponivel Boolean @default(true)
   manutencoes Manutencao[]
   operacao Operacao[]
 }

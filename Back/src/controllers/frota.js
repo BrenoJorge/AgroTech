@@ -52,6 +52,20 @@ const update = async (req, res, next) => {
     res.status(200).send(frotas).end()
 }
 
+const updateDisponivel = async (id) => {
+    const frotas = await prisma.Frota.update({
+        where: { id: Number(id) },
+        data: {disponivel:true} 
+    })
+}
+
+const updateIndisponivel = async (id) => {
+    const frotas = await prisma.Frota.update({
+        where: { id: Number(id) },
+        data: {disponivel:false} 
+    })
+}
+
 const remove = async (req, res, next) => {
     const frotas = await prisma.Frota.delete({
         where: {
