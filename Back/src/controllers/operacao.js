@@ -78,12 +78,14 @@ const read = async (req, res, next) => {
             descricao:true,
             frota:{
                 select:{
-                    placa:true
+                    placa:true,
+                    id:true
                 }
             },
             motorista:{
                 select:{
-                    nome:true
+                    nome:true,
+                    id:true
                 }
             }
         }

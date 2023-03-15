@@ -6,6 +6,7 @@
 
 html {
     height: 100vh;
+    overflow: hidden;
 }
 
 body {
@@ -22,6 +23,11 @@ form {
 button{
     background-color: none;
     border: none;
+}
+
+.container{
+    overflow-y: scroll;
+    height: 90vh;
 }
 
 .header {
@@ -47,6 +53,10 @@ button{
     align-items: center;
 }
 
+.row{
+    display: grid;
+
+}
 
 .row>label {
     font-size: 20px;

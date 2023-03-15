@@ -46,9 +46,13 @@ const read = async (req, res, next) => {
             descricao:true,
             frota:{
                 select:{
-                    placa:true
+                    placa:true,
+                    id:true
                 }
             }
+        },
+        orderBy:{
+            id:"desc"
         }
     })
     res.status(200).json(manutencoes).end()

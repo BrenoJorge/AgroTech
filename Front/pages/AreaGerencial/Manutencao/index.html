@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="../../../global/styles.css">
     <link rel="stylesheet" href="./styles.css">
     <link rel="stylesheet" href="../../../global/stylesTabela.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.9.2/dist/semantic.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.9.2/dist/semantic.min.js"></script>
     <title>Manutenção</title>
 </head>
 
@@ -102,6 +105,67 @@
             </table>
         </div>
     </div>
+
+    <div class="campo-model model">
+        <form>
+            <div class="row-header">
+                <button type="button" class="submit model" onclick="del()">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" height="25" width="25">
+                        <path fill="currentColor"
+                            d="M8.78842 5.03866C8.86656 4.96052 8.97254 4.91663 9.08305 4.91663H11.4164C11.5269 4.91663 11.6329 4.96052 11.711 5.03866C11.7892 5.11681 11.833 5.22279 11.833 5.33329V5.74939H8.66638V5.33329C8.66638 5.22279 8.71028 5.11681 8.78842 5.03866ZM7.16638 5.74939V5.33329C7.16638 4.82496 7.36832 4.33745 7.72776 3.978C8.08721 3.61856 8.57472 3.41663 9.08305 3.41663H11.4164C11.9247 3.41663 12.4122 3.61856 12.7717 3.978C13.1311 4.33745 13.333 4.82496 13.333 5.33329V5.74939H15.5C15.9142 5.74939 16.25 6.08518 16.25 6.49939C16.25 6.9136 15.9142 7.24939 15.5 7.24939H15.0105L14.2492 14.7095C14.2382 15.2023 14.0377 15.6726 13.6883 16.0219C13.3289 16.3814 12.8414 16.5833 12.333 16.5833H8.16638C7.65805 16.5833 7.17054 16.3814 6.81109 16.0219C6.46176 15.6726 6.2612 15.2023 6.25019 14.7095L5.48896 7.24939H5C4.58579 7.24939 4.25 6.9136 4.25 6.49939C4.25 6.08518 4.58579 5.74939 5 5.74939H6.16667H7.16638ZM7.91638 7.24996H12.583H13.5026L12.7536 14.5905C12.751 14.6158 12.7497 14.6412 12.7497 14.6666C12.7497 14.7771 12.7058 14.8831 12.6277 14.9613C12.5495 15.0394 12.4436 15.0833 12.333 15.0833H8.16638C8.05588 15.0833 7.94989 15.0394 7.87175 14.9613C7.79361 14.8831 7.74972 14.7771 7.74972 14.6666C7.74972 14.6412 7.74842 14.6158 7.74584 14.5905L6.99681 7.24996H7.91638Z"
+                            clip-rule="evenodd" fill-rule="evenodd"></path>
+                    </svg>
+                </button>
+                <button type="button" onclick="toggle()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                        class="bi bi-x-circle" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                        <path
+                            d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                    </svg>
+                </button>
+            </div>
+
+            <div class="ui search selection dropdown" id="diacriticsexample">
+                <input type="hidden" name="diacritics" id="frota">
+                <i class="dropdown icon"></i>
+                <div class="default text">Selecionar Frota</div>
+                <div class="menu">
+                </div>
+            </div>
+
+            <div class="row">
+                <label for="placa">Descrção :</label>
+                <textarea name="descricao" id="descricao" cols="30" rows="10"></textarea>
+            </div>
+            <div class="row">
+                <label for="marca">Valor :</label>
+                <div class="ui right labeled input ">
+                    <label for="amount" class="ui label">
+                        <font style="vertical-align: inherit;">
+                            <font style="vertical-align: inherit;">$</font>
+                        </font>
+                    </label>
+                    <input class="search" type="text" placeholder="Valor da manutenção" id="valor">
+
+                </div>
+            </div>
+
+            <div class="row-footer">
+                <button class="submit">
+                    <p>CADASTRAR</p>
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <button id="adicionar" class="submit" onclick="toggle()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send"
+            viewBox="0 0 16 16">
+            <path
+                d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z" />
+        </svg>
+    </button>
 
     <script src="https://kit.fontawesome.com/c20c8761af.js" crossorigin="anonymous"></script>
     <script src="./script.js"></script>
