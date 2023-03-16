@@ -22,7 +22,12 @@ function fazerLogin() {
             if(response.mensagem == "Usuario não encontrado"){
                 mensagem.classList.remove("model")
                 mensagem.querySelector("h3").innerHTML = response.mensagem
+            } else if(response.role == "dev"){
+                localStorage.setItem('user', JSON.stringify({"nome" : response.nome, "token":response.token}))
+            } else {
+                localStorage.setItem('user', JSON.stringify({"nome" : response.nome, "token":response.token}))
             }
+
         })
         .catch(err => console.error(err));
 }

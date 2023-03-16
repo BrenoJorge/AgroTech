@@ -182,7 +182,7 @@ function create() {
       
       fetch('http://localhost:3000/operacao', options)
         .then(response => response.json())
-        .then(response => console.log(response))
+        .then(response => Window.location.reload())
         .catch(err => console.error(err));
 }
 

@@ -15,17 +15,7 @@ body{
     flex-direction: column;
     height: 100vh;
     overflow: hidden;
-}
-
-.background{
-    background-image: linear-gradient(to right, #6F814F,#1A260F,#6F814F,#1A260F,#1A260F,#6F814F,#1A260F);
-    filter:blur(1.5rem);
-    height: 110vh;
-    width: 110vw;
-    position:absolute;
-    top: -10;
-    left: -10;
-    z-index: -1;
+    background-color: #212121;
 }
 
 div{
@@ -33,7 +23,7 @@ div{
     padding: 40px;
     border-radius: 15px;
     color: #fff;
-    border: 1px solid white;
+    border: 1px solid #1F2E11;
     display: flex;
     justify-content: center;
     align-items: center;

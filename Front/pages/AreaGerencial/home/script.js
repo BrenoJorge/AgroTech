@@ -1,5 +1,6 @@
 function carregar() {
 
+  let teste = 
   const options = { method: 'GET' };
 
   fetch('http://localhost:3000/frota', options)
