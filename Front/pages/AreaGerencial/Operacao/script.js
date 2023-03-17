@@ -2,6 +2,7 @@ const tabela = document.querySelector('tr')
 const form = document.querySelector("form")
 const diacriticsexample1 = document.querySelector("#diacriticsexample1")
 const diacriticsexample2 = document.querySelector("#diacriticsexample2")
+const user = JSON.parse(localStorage.getItem("user"))
 
 var dadosLocal = []
 var dadosMotorista = []
@@ -29,6 +30,9 @@ $('#diacriticsexample2')
 
 function onLoad() {
 
+    
+
+    document.querySelector("#NomeUser").innerHTML = user.nome
     const options = { method: 'GET' };
 
     fetch('http://localhost:3000/operacao', options)
@@ -44,7 +48,7 @@ function onLoad() {
                 tab.querySelector('.frota').innerHTML = element.frota.placa
                 tab.querySelector('.dataSaida').innerHTML = formatarData(element.dataSaida)
 
-                if(element.dataRetorno != null){
+                if (element.dataRetorno != null) {
                     tab.querySelector('.dataRetorno').innerHTML = formatarData(element.dataRetorno)
                 } else {
                     tab.querySelector('.dataRetorno').innerHTML = "em serviço"
@@ -74,9 +78,10 @@ function onLoad() {
             dadosMotorista = response
             response.forEach(dado => {
 
-            let string = `<div class="item" id="cardMotorista${dado.id}">${dado.nome}</div>`
-            diacriticsexample2.querySelector(".menu").innerHTML += string
-        })})
+                let string = `<div class="item" id="cardMotorista${dado.id}">${dado.nome}</div>`
+                diacriticsexample2.querySelector(".menu").innerHTML += string
+            })
+        })
         .catch(err => console.error(err));
 }
 
@@ -150,8 +155,8 @@ function create() {
 
     let descricao = form.querySelector("#descricao").value
 
-    dadosFrota.forEach(dado =>  {
-        if(dado.placa == frota){
+    dadosFrota.forEach(dado => {
+        if (dado.placa == frota) {
             frota = dado.id
         }
 
@@ -160,27 +165,27 @@ function create() {
     dadosMotorista.forEach(dado => {
 
         dado.nome = dado.nome.toUpperCase()
-        if(dado.nome == motorista){
+        if (dado.nome == motorista) {
             motorista = dado.id
         }
     })
 
     let info = {
-        "idMotorista":Number(motorista),
-        "idFrota":Number(frota),
-        "descricao":descricao
+        "idMotorista": Number(motorista),
+        "idFrota": Number(frota),
+        "descricao": descricao
     }
 
     const options = {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0ZXN0ZXRlc3RlQGdtYWlsLmNvbSIsInJvbGUiOiJkZXYiLCJub21lIjoiRGVzZW52b2x2ZWRvciIsInNlbmhhIjoiMTIzNCIsImlhdCI6MTY3NzUwNjc0NiwiZXhwIjoxNjc3NTQyNzQ2fQ.gY7Douc6tXMKvtx84Vp_q9CveuA6-fCxEMe9jmiT2F0'
+            'Content-Type': 'application/json',
+            authorization: user.token
         },
         body: JSON.stringify(info)
-      };
-      
-      fetch('http://localhost:3000/operacao', options)
+    };
+
+    fetch('http://localhost:3000/operacao', options)
         .then(response => response.json())
         .then(response => Window.location.reload())
         .catch(err => console.error(err));
@@ -196,8 +201,8 @@ function update() {
 
     let descricao = form.querySelector("#descricao").value
 
-    dadosFrota.forEach(dado =>  {
-        if(dado.placa == frota){
+    dadosFrota.forEach(dado => {
+        if (dado.placa == frota) {
             frota = dado.id
         }
 
@@ -206,20 +211,21 @@ function update() {
     dadosMotorista.forEach(dado => {
 
         dado.nome = dado.nome.toUpperCase()
-        if(dado.nome == motorista){
+        if (dado.nome == motorista) {
             motorista = dado.id
         }
     })
 
     let info = {
-        "idMotorista":Number(motorista),
-        "idFrota":Number(frota),
-        "descricao":descricao
+        "idMotorista": Number(motorista),
+        "idFrota": Number(frota),
+        "descricao": descricao
     }
     const options = {
         method: 'PUT',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            authorization: user.token
         },
         body: JSON.stringify(info)
     };
@@ -235,14 +241,18 @@ function update() {
 function del() {
     const options = {
         method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+            'Content-Type': 'application/json',
+            authorization: user.token
+        },
         body: `{"id":${auxiliar}}`
     };
 
-    fetch('http://localhost:3000/operacao', options)
-        .then(response => response.json())
-        .then(response => window.location.reload())
-        .catch(err => console.error(err));
+    if (confirm('Tem certeza que deseja excluir a operação? id :' + auxiliar))
+        fetch('http://localhost:3000/operacao', options)
+            .then(response => response.json())
+            .then(response => window.location.reload())
+            .catch(err => console.error(err));
 }
 
 function formatarData(data) {
@@ -252,17 +262,17 @@ function formatarData(data) {
     return dataFormatada;
 }
 
-function finalizar(id){
+function finalizar(id) {
     const options = {
         method: 'PUT',
         headers: {
-          'Content-Type': 'application/json',
-          authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0ZXN0ZXRlc3RlQGdtYWlsLmNvbSIsInJvbGUiOiJkZXYiLCJub21lIjoiRGVzZW52b2x2ZWRvciIsInNlbmhhIjoiMTIzNCIsImlhdCI6MTY3NzUwNjc0NiwiZXhwIjoxNjc3NTQyNzQ2fQ.gY7Douc6tXMKvtx84Vp_q9CveuA6-fCxEMe9jmiT2F0'
+            'Content-Type': 'application/json',
+            authorization: user.token
         },
         body: '{"dataRetorno":null}'
-      };
-      
-      fetch(`http://localhost:3000/operacao/${id}`, options)
+    };
+
+    fetch(`http://localhost:3000/operacao/${id}`, options)
         .then(response => response.json())
         .then(response => window.location.reload())
         .catch(err => console.error(err));

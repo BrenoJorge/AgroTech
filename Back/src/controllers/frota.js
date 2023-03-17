@@ -20,6 +20,7 @@ const read = async (req, res, next) => {
     const frotas = await prisma.Frota.findMany({
         select: {
             id: true,
+            disponivel:true,
             modelo: true,
             placa: true,
             marca: true,
@@ -80,5 +81,7 @@ module.exports = {
     read,
     readId,
     update,
-    remove
+    remove,
+    updateDisponivel,
+    updateIndisponivel
 }

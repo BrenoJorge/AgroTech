@@ -1,6 +1,7 @@
 const tabela = document.querySelector('tr')
 const form = document.querySelector("form")
 const diacriticsexample = document.querySelector("#diacriticsexample")
+const user = JSON.parse(localStorage.getItem("user"))
 
 var dadosLocal = []
 var auxiliar = 0
@@ -20,6 +21,9 @@ $('#diacriticsexample')
 
 function onLoad() {
 
+
+    document.querySelector("#NomeUser").innerHTML = user.nome
+
     const options = { method: 'GET' };
 
     fetch('http://localhost:3000/manutencao', options)
@@ -32,13 +36,13 @@ function onLoad() {
 
                 tab.querySelector('.id').innerHTML = element.id
                 tab.querySelector('.dataInicio').innerHTML = formatarData(element.dataInicio)
-                if(element.dataFim != null){
+                if (element.dataFim != null) {
                     tab.querySelector('.dataFim').innerHTML = formatarData(element.dataFim)
                 } else {
                     tab.querySelector('.dataFim').innerHTML = "em manutenção"
                     tab.innerHTML += `<td><button class="submit" onclick="finalizar(${element.id})"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"/></svg></button></td>`
                 }
-                
+
                 tab.querySelector('.valor').innerHTML = element.valor
                 tab.querySelector('.descricao').innerHTML = element.descricao
                 tab.querySelector('.frota').innerHTML = element.frota.placa
@@ -114,8 +118,8 @@ function redirect() {
 function create() {
     let frota = form.querySelector('#frota').value
     frota = frota.toUpperCase()
-    dadosLocal.forEach(dado =>  {
-        if(dado.frota.placa == frota){
+    dadosLocal.forEach(dado => {
+        if (dado.frota.placa == frota) {
             frota = dado.frota.id
         }
     })
@@ -131,23 +135,23 @@ function create() {
     const options = {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJkZXZ0ZXN0ZTJAZ21haWwuY29tIiwicm9sZSI6ImRldiIsIm5vbWUiOiJEZXNlbnZvbHZlZG9yIiwic2VuaGEiOiI4MWRjOWJkYjUyZDA0ZGMyMDAzNmRiZDgzMTNlZDA1NSIsImlhdCI6MTY3ODg4NTI2MiwiZXhwIjoxNjc4OTIxMjYyfQ.Nr1-gz5bo4x660PC0kU_kkZd26Doaa4dOsUNLRQGl2Q'
+            'Content-Type': 'application/json',
+            authorization: user.token
         },
         body: JSON.stringify(info)
-      };
-      
-      fetch('http://localhost:3000/manutencao', options)
+    };
+
+    fetch('http://localhost:3000/manutencao', options)
         .then(response => response.json())
-        .then(response => console.log(response))
+        .then(response => window.location.reload())
         .catch(err => console.error(err));
 }
 
 function update() {
     let frota = form.querySelector('#frota').value
     frota = frota.toUpperCase()
-    dadosLocal.forEach(dado =>  {
-        if(dado.frota.placa == frota){
+    dadosLocal.forEach(dado => {
+        if (dado.frota.placa == frota) {
             frota = dado.frota.id
         }
     })
@@ -167,7 +171,8 @@ function update() {
     const options = {
         method: 'PUT',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            authorization: user.token
         },
         body: JSON.stringify(info)
     };
@@ -181,16 +186,23 @@ function update() {
 }
 
 function del() {
+
     const options = {
         method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+            'Content-Type': 'application/json',
+            authorization: user.token
+        },
         body: `{"id":${auxiliar}}`
     };
 
-    fetch('http://localhost:3000/manutencao', options)
+    if(confirm("Tem Certeza que deseja excluir essa manutenção? id :" + auxiliar)){
+        fetch('http://localhost:3000/manutencao', options)
         .then(response => response.json())
         .then(response => window.location.reload())
         .catch(err => console.error(err));
+    }
+    
 }
 
 function formatarData(data) {
@@ -200,15 +212,24 @@ function formatarData(data) {
     return dataFormatada;
 }
 
-function finalizar(id){
+function finalizar(id) {
+
     const options = {
         method: 'PUT',
-        headers: {'Content-Type': 'application/json'},
+        headers: {
+            'Content-Type': 'application/json',
+            authorization: user.token
+        },
         body: '{"dataFim":null}'
-      };
-      
-      fetch(`http://localhost:3000/manutencao/${id}`, options)
+    };
+
+    if(confirm("Tem Certeza que deseja finalizar essa manutenção? id :" + id)){
+        fetch(`http://localhost:3000/manutencao/${id}`, options)
         .then(response => response.json())
-        .then(response => console.log(response))
+        .then(response => window.location.reload())
         .catch(err => console.error(err));
+    }
+   
+
+    
 }

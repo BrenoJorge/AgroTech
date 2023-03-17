@@ -11,6 +11,10 @@ form.addEventListener('submit', (e) => {
 
 function onLoad() {
 
+    const user = JSON.parse(localStorage.getItem("user"))
+
+    document.querySelector("#NomeUser").innerHTML = user.nome
+
     const options = { method: 'GET' };
 
     fetch('http://localhost:3000/frota', options)
@@ -79,7 +83,7 @@ function create() {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0ZXN0ZXRlc3RlQGdtYWlsLmNvbSIsInJvbGUiOiJkZXYiLCJub21lIjoiRGVzZW52b2x2ZWRvciIsInNlbmhhIjoiMTIzNCIsImlhdCI6MTY3ODE4ODMwNiwiZXhwIjoxNjc4MjI0MzA2fQ.5u6WHQXI2duHrEZKgHro2EtzyX9NOun8c1R-Yh8wuAE'
+            authorization: user.token
         },
         body: JSON.stringify(info)
     };
@@ -109,33 +113,33 @@ function update() {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
-            authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0ZXN0ZXRlc3RlQGdtYWlsLmNvbSIsInJvbGUiOiJkZXYiLCJub21lIjoiRGVzZW52b2x2ZWRvciIsInNlbmhhIjoiMTIzNCIsImlhdCI6MTY3ODE4ODMwNiwiZXhwIjoxNjc4MjI0MzA2fQ.5u6WHQXI2duHrEZKgHro2EtzyX9NOun8c1R-Yh8wuAE'
+            authorization: user.token
         },
         body: JSON.stringify(info)
-};
+    };
 
-fetch(`http://localhost:3000/frota/${id_veic}`, options)
-    .then(response => response.json())
-    .then(response => {
-        window.location.reload();
-    })
-    .catch(err => console.error(err));
+    fetch(`http://localhost:3000/frota/${id_veic}`, options)
+        .then(response => response.json())
+        .then(response => {
+            window.location.reload();
+        })
+        .catch(err => console.error(err));
 }
 
-function del(){
+function del() {
     const options = {
         method: 'DELETE',
-        headers: {'Content-Type': 'application/json'},
+        headers: { 'Content-Type': 'application/json', authorization: user.token },
         body: `{"id":${id_veic}}`
-      };
-      
-      fetch('http://localhost:3000/frota', options)
+    };
+
+    fetch('http://localhost:3000/frota', options)
         .then(response => response.json())
         .then(response => console.log(response))
         .catch(err => console.error(err));
 }
 
-function filterTable(){
+function filterTable() {
     let busca, filter, table, tr, td, i, txtValue
 
     busca = document.querySelector("#filtro")
@@ -144,11 +148,11 @@ function filterTable(){
     table = document.querySelector("table")
     tr = table.getElementsByTagName("tr")
 
-    for (i = 0; i < tr.length;i++){
+    for (i = 0; i < tr.length; i++) {
         td = tr[i].getElementsByTagName("td")
-        for(j = 0; j < td.length; j++){
+        for (j = 0; j < td.length; j++) {
             txtValue = td[j].textContent || td[j].innerHTML
-            if(txtValue.toUpperCase().indexOf(filter) > -1){
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
                 tr[i].style.display = ""
                 break
             } else {

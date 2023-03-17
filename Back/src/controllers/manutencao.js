@@ -1,4 +1,6 @@
 const { PrismaClient } = require('@prisma/client')
+const Motorista = require('../controllers/motorista');
+const Frota = require('../controllers/frota');
 
 const prisma = new PrismaClient()
 
@@ -33,6 +35,7 @@ const create = async (req, res, next) => {
         return err
     })
 
+    Frota.updateIndisponivel(req.body.idFrota)
     res.status(200).json(manutencoes).end()
 }
 

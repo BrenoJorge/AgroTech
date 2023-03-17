@@ -3,6 +3,10 @@ const email = document.querySelector("#email")
 const senha = document.querySelector("#senha")
 const mensagem = document.querySelector(".mensagem")
 
+function carregar(){
+    localStorage.clear()
+}
+
 function fazerLogin() {
 
     let dados = {
@@ -24,8 +28,10 @@ function fazerLogin() {
                 mensagem.querySelector("h3").innerHTML = response.mensagem
             } else if(response.role == "dev"){
                 localStorage.setItem('user', JSON.stringify({"nome" : response.nome, "token":response.token}))
+                window.location.href = "../AreaGerencial/home/index.html"
             } else {
                 localStorage.setItem('user', JSON.stringify({"nome" : response.nome, "token":response.token}))
+                window.location.href = "../AreaOperacional/index.html"
             }
 
         })

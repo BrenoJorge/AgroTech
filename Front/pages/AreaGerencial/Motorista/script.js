@@ -1,5 +1,6 @@
 const tabela = document.querySelector('tr')
 const form = document.querySelector("form")
+const user = JSON.parse(localStorage.getItem("user"))
 var id_motorista = 0
 
 var dadosLocal
@@ -10,7 +11,9 @@ form.addEventListener('submit', (e) => {
 })
 
 function onLoad() {
+    
 
+    document.querySelector("#NomeUser").innerHTML = user.nome
     const options = { method: 'GET' };
 
     fetch('http://localhost:3000/motorista', options)
@@ -18,7 +21,7 @@ function onLoad() {
         .then(response => {
             dadosLocal = response
             response.forEach(element => {
-                
+
                 let tab = tabela.cloneNode(true)
 
                 tab.querySelector('.id').innerHTML = element.id
@@ -80,7 +83,8 @@ function create() {
     const options = {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            authorization: user.token
         },
         body: JSON.stringify(info)
     };
@@ -109,27 +113,31 @@ function update() {
     const options = {
         method: 'PUT',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            authorization: user.token
         },
         body: JSON.stringify(info)
-};
+    };
 
-fetch(`http://localhost:3000/motorista/${id_motorista}`, options)
-    .then(response => response.json())
-    .then(response => {
-        window.location.reload();
-    })
-    .catch(err => console.error(err));
+    fetch(`http://localhost:3000/motorista/${id_motorista}`, options)
+        .then(response => response.json())
+        .then(response => {
+            window.location.reload();
+        })
+        .catch(err => console.error(err));
 }
 
-function del(){
+function del() {
     const options = {
         method: 'DELETE',
-        headers: {'Content-Type': 'application/json'},
+        headers: {
+            'Content-Type': 'application/json',
+            authorization: user.token
+        },
         body: `{"id":${id_motorista}}`
-      };
-      
-      fetch('http://localhost:3000/motorista', options)
+    };
+
+    fetch('http://localhost:3000/motorista', options)
         .then(response => response.json())
         .then(response => window.location.reload())
         .catch(err => console.error(err));

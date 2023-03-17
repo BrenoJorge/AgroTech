@@ -30,6 +30,10 @@ button{
     height: 90vh;
 }
 
+.containerText{
+    font-size: 20px;
+}
+
 .header {
     display: flex;
     justify-content: space-between;

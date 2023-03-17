@@ -132,6 +132,8 @@ const updateDataRetorno = async (req, res, next) => {
         where: { id: Number(req.params.id) },
         data: { dataRetorno: req.body.dataRetorno }
     })
+    Motorista.updateDisponivel(operacoes.idMotorista)
+    Frota.updateDisponivel(operacoes.idFrota)
     res.status(200).send(operacoes).end()
 }
 
