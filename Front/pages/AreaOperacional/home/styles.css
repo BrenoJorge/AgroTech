@@ -11,8 +11,3 @@ html{
 body{
     display: flex;
 }
-
-#myChart{
-    height: 70vh !important;
-    width: 70vh !important;
-}
