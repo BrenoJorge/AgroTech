@@ -1,5 +1,5 @@
 # AgroTech projeto CRUD
-## back (express mongoose) e front html, css, js
+## back (node js), front (html, css, js) e mobile (react-native e expo)
 - Requisitos
     - Node.js: https://nodejs.org/
     - MySQL: https://www.mysql.com/
