@@ -20,7 +20,7 @@ function fazerLogin() {
         body: JSON.stringify(dados)
       };
       
-      fetch('http://localhost:3000/login', options)
+      fetch('http://localhost:3001/login', options)
         .then(response => response.json())
         .then(response => {
             if(response.mensagem == "Usuario não encontrado"){

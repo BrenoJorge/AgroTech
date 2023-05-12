@@ -1,5 +1,6 @@
 const tabela = document.querySelector('tr')
 const form = document.querySelector("form")
+const user = JSON.parse(localStorage.getItem("user"))
 var id_veic = 0
 
 var dadosLocal
@@ -56,6 +57,9 @@ function toggle(id) {
         form.querySelector('p').innerHTML = "CADASTRAR"
         form.querySelectorAll('.submit')[0].classList.add('model')
         form.querySelector('.row-header').style.justifyContent = 'end'
+        form.querySelector('#modelo').value = ""
+        form.querySelector('#placa').value = ""
+        form.querySelector('#marca').value = ""
     }
 
 }

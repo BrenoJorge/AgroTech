@@ -45,7 +45,7 @@ export default function Operacao({ route }) {
                         var dateF = new Date(operacao.dataRetorno)
                         var dtI = dateIn.toLocaleDateString('pt-BR', { timeZone: 'UTC' })
                         var dtF = dateF.toLocaleDateString('pt-BR', { timeZone: 'UTC' })
-                        if (operacao.data_retorno !== null) {
+                        if (operacao.dataRetorno !== null) {
                             return (
                                 <View style={styles.veic} key={index}>
                                     <View style={styles.veicL} >
